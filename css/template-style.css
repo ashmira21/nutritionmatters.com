@@ -254,12 +254,30 @@ ul.chevron .submenu > a::after, ul.chevron .sub-submenu > a::after, ul.chevron .
 .top-nav ul ul a {
   color: #eee;
 }
-
-.logo img {
-  margin: 0 auto;
-  max-width: 300px;
-  width: 100%;
+.logo {
+  display: flex;
+  justify-content: center; /* Centers the logo horizontally */
+  align-items: center;    /* Centers the logo vertically */
+  padding: 1rem;          /* Adds some padding for touch-friendly areas */
+  text-decoration: none;  /* Removes any underline */
 }
+
+/* Logo image styling */
+.logo img {
+  max-width: 100%;  /* Ensures the image resizes to fit its container */
+  height: auto;     /* Maintains the image's aspect ratio */
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  .logo {
+    padding: 0.5rem; /* Adjust padding for smaller screens */
+  }
+  .logo img {
+    max-width: 80%; /* Reduce the image size on smaller screens */
+  }
+}
+
 
 /* Font colors */
 .background-white, .background-white p, a.background-white, .background-white a, .background-white a:link, .background-white a:visited, .background-white a:hover, .background-white a:active {
