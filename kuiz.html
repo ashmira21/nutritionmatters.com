@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en-US">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Nutrition Matters PJK</title>
+      <link rel="stylesheet" href="css/components.css">
+      <link rel="stylesheet" href="css/icons.css">
+      <link rel="stylesheet" href="css/responsee.css">
+      <link rel="stylesheet" href="owl-carousel/owl.carousel.css">
+      <link rel="stylesheet" href="owl-carousel/owl.theme.css">
+      <!-- CUSTOM STYLE -->      
+      <link rel="stylesheet" href="css/template-style.css">
+      <link href="https://fonts.googleapis.com/css?family=Barlow:100,300,400,700,800&amp;subset=latin-ext" rel="stylesheet">  
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+      <script type="text/javascript" src="js/hamburger.js"></script>
+      <script src="js/quiz-leaderboard.js"></script>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+      <style>
+        /* Add this to your CSS file or inside a <style> tag in the <head> section */
+        body {
+          background-image: url('img/belakang.jpg'); /* Replace with your image path */
+          background-size: cover; /* Ensures the image covers the entire screen */
+          background-position: center; /* Centers the image */
+          background-repeat: no-repeat; /* Prevents the image from repeating */
+          background-attachment: fixed; /* Keeps the background fixed during scrolling */
+        }
+          .quiz-container {
+      max-width: 800px;
+      margin: 30px auto;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 20px;
+    }
+    .question-img {
+      width: 100%;
+      max-height: 250px;
+      object-fit: contain;
+      margin-bottom: 15px;
+      border-radius: 10px;
+    }
+    .leaderboard {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+    }
+  </style>
+   </head>
+
+   <!--
+    You can change the color scheme of the page. Just change the class of the <body> tag. 
+    You can use this class: "primary-color-white", "primary-color-red", "primary-color-orange", "primary-color-blue", "primary-color-aqua", "primary-color-dark" 
+    -->
+    
+    <!--
+    Each element is able to have its own background or text color. Just change the class of the element.  
+    You can use this class: 
+    "background-white", "background-red", "background-orange", "background-blue", "background-aqua", "background-primary" 
+    "text-white", "text-red", "text-orange", "text-blue", "text-aqua", "text-primary"
+    -->
+
+   <body class="size-1520 primary-color-red background-dark">
+      <!-- HEADER -->
+      <header class="grid">
+     <!-- Top Navigation -->
+     <nav class="s-12 grid background-none background-primary-hightlight">
+      <!-- logo -->
+      <a href="index.html" class="m-12 l-3 padding-2x logo">
+         <img src="img/Shine.png">
+      </a>
+           <div class="top-nav s-12 l-9">
+            <!-- Hamburger Menu Button for Mobile -->
+            <button class="hamburger-menu">☰</button>
+            <ul class="top-ul right chevron">
+              <li><a href="index.html">Laman Utama</a></li>
+              <li class="dropdown">
+                <a href="#">Sub Topik</a>
+                <ul class="dropdown-menu">
+                  <li><a href="Notapemakanan.html">Pemakanan Makronutrien & Mikronutrien</a></li>
+                  <li><a href="https://cookpad.com/my/search/sihat">Resepi Makanan Sihat</a></li>
+                  <li><a href="https://www.youtube.com/watch?v=WqD2xv-4S9g">Pinggan Sihat Malaysia</a></li>
+                  <li><a href="https://www2.moh.gov.my/index.php/pages/view/2725">Piramid Makanan Malaysia</a></li>
+                  <li><a href="https://www.calculator.net/calorie-calculator.html">Kalkulator Kalori</a></li>
+                  <li><a href="cadangan latihan.html">Cadangan Latihan</a></li>
+                  <li><a href="kuiz.html">Kuiz Pemakanan</a></li>
+                  <li><a href="inovasi.html">Inovasi Karnival Pengajian Pendidikan 2025</a></li>
+                  <li><a href="eduinnovate.html">Edu Innovate 2025</a></li>
+                  <li><a href="feedback.html">Maklum Balas</a></li>
+                </ul>
+              </li>
+              <li><a href="maklumatguru.html">Maklumat Guru</a></li>
+              <li><a href="contact.html">Hubungi kami</a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+      <main role="main">
+        <header class="grid">
+           <div class="s-12 padding-2x">
+              <h1 class="text-strong text-white text-center center text-size-60 text-uppercase margin-bottom-25">KUIZ PEMAKANAN</h1>
+           </div>
+        </header>
+<body>
+  <div class="container quiz-container">
+    <h1 class="text-center text-warning">Mari Jawab!</h1>
+<div id="quiz-form" class="text-center">
+  <div class="mb-3">
+    <label for="name" class="form-label">Nama Penuh</label>
+    <input type="text" class="form-control" id="name" placeholder="Contoh: Ali bin Ahmad" required>
+  </div>
+  <div class="mb-3">
+    <label for="class" class="form-label">Kelas</label>
+    <input type="text" class="form-control" id="class" placeholder="Contoh: 1 Cemerlang" required>
+  </div>
+  <button class="btn btn-warning w-100" onclick="startQuiz()">Mula Kuiz</button>
+</div>
+
+<!-- Quiz section will appear here -->
+<div id="quiz-section" class="mt-4" style="display:none;">
+      <div id="question-container">
+        <h3 id="question-text"></h3>
+        <img id="question-image" class="question-img" src="" alt="Question Image" style="display:none;">
+        <div id="answer-buttons" class="btn-group-vertical w-100"></div>
+      </div>
+      <button id="next-btn" class="btn btn-light mt-3 w-100">Soalan Seterusnya</button>
+    </div>
+<audio id="correct-sound" src="sounds/right.mp3" preload="auto"></audio>
+<audio id="wrong-sound" src="sounds/wrong.mp3" preload="auto"></audio>
+<audio id="bg-music" src="sounds/Lobby Music (Original Soundtrack).mp3" preload="auto" loop></audio>
+    <div class="leaderboard mt-4">
+      <h4 class="text-center">Leaderboard</h4>
+      <ul id="leaderboard-list" class="list-group list-group-flush"></ul>
+      <button onclick="resetLeaderboard()" class="btn btn-danger mt-3">Reset Leaderboard</button>
+    <button onclick="answerAgain()" class="btn btn-secondary mt-3">Jawab Semula</button>
+    </div>
+  </div>
+
+  <script>
+    let currentQuestionIndex = 0;
+    let score = 0;
+    const studentData = {};
+
+    const form = document.getElementById('student-info-form');
+    const quizSection = document.getElementById('quiz-section');
+    const questionText = document.getElementById('question-text');
+    const questionImage = document.getElementById('question-image');
+    const answerButtons = document.getElementById('answer-buttons');
+    const nextButton = document.getElementById('next-btn');
+    const leaderboardList = document.getElementById('leaderboard-list');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      studentData.name = document.getElementById('studentName').value;
+      studentData.class = document.getElementById('studentClass').value;
+      form.style.display = 'none';
+      quizSection.style.display = 'block';
+      showQuestion();
+    });
+
+    function showQuestion() {
+      resetState();
+      const question = questions[currentQuestionIndex];
+      questionText.innerText = question.text;
+      if (question.image) {
+        questionImage.src = question.image;
+        questionImage.style.display = 'block';
+      } else {
+        questionImage.style.display = 'none';
+      }
+      question.answers.forEach(answer => {
+        const btn = document.createElement('button');
+        btn.innerText = answer.text;
+        btn.classList.add('btn', 'btn-outline-light', 'mb-2');
+        btn.addEventListener('click', () => selectAnswer(answer));
+        answerButtons.appendChild(btn);
+      });
+    }
+
+    function resetState() {
+      answerButtons.innerHTML = '';
+      nextButton.style.display = 'none';
+    }
+
+    function selectAnswer(answer) {
+      if (answer.correct) score++;
+      nextButton.style.display = 'block';
+    }
+
+    nextButton.addEventListener('click', () => {
+      currentQuestionIndex++;
+      if (currentQuestionIndex < questions.length) {
+        showQuestion();
+      } else {
+        showLeaderboard();
+      }
+    });
+
+    function showLeaderboard() {
+      quizSection.innerHTML = `<h2 class='text-center text-success'>Tahniah, ${studentData.name} dari ${studentData.class}!</h2>
+        <p class='text-center'>Skor anda: ${score}/${questions.length}</p>`;
+
+      const li = document.createElement('li');
+      li.className = 'list-group-item bg-transparent text-white';
+      li.textContent = `${studentData.name} (${studentData.class}) - Skor: ${score}`;
+      leaderboardList.appendChild(li);
+    }
+  </script>
+     
+
+      <!-- FOOTER -->
+      <footer class="grid">
+        <!-- Footer - top -->
+        <!-- Image-->
+        <br><div class="s-12 l-3 m-row-3 margin-bottom background-image" style="background-image:url(img/fakulti.jpg)"></div>
+        <div class="s-12 m-9 l-3 padding-2x margin-bottom background-dark">
+           <h2 class="text-strong text-uppercase">Siapa kami?</h2>
+           <p>Kami adalah pelajar semester 5 dalam bidang Pendidikan Jasmani di bawah Fakulti Sains Sukan dan Kejurulatihan, komited untuk mendalami ilmu sukan, kesihatan, dan kejurulatihan demi membentuk generasi yang sihat dan aktif.</p>
+        </div>
+        
+        <!-- Footer - bottom -->
+        <div class="s-12 text-center margin-bottom">
+          <p class="text-size-12 text-white">Copyright 2025, Vision Design - graphic zoo</p>
+          <p class="text-size-12 text-white">Untuk Tujuan Inovasi Pendidikan Jasmani</p>
+          <p><a class="text-size-12 text-white text-primary-hover" href="http://www.myresponsee.com" title="Responsee - lightweight responsive framework">Design and coding oleh Ahli kumpulan Inovasi FSSK</a></p>
+        </div>
+      </footer>                                                                    
+      <script type="text/javascript" src="js/responsee.js"></script>
+      <script type="text/javascript" src="owl-carousel/owl.carousel.js"></script>
+      <script type="text/javascript" src="js/template-scripts.js"></script>
+      <script>
+        $(document).ready(function(){
+          $(".owl-carousel").owlCarousel({
+            items: 1,
+            loop: true,
+            nav: true,
+            navText: ["<i class='fas fa-chevron-left'></i>","<i class='fas fa-chevron-right'></i>"],
+            dots: true
+          });
+        });
+      </script>
+
+   </body>
+</html>
