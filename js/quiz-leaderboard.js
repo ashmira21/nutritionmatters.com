@@ -1,5 +1,9 @@
+// quiz-leaderboard.js
+
 let studentData = {};
 let score = 0;
+let currentQuestionIndex = 0; // Added to track current question
+
 const questions = [
   {
     question: "1. Apakah maksud pemakanan seimbang?",
@@ -110,24 +114,42 @@ const questions = [
     answer: "C. Mengawal suhu badan dan menyahtoksik",
     image: "img/minum air.jpg"
   }
-  // Add more questions as needed
 ];
 
 // --- Quiz Logic ---
 function startQuiz() {
-  const name = document.getElementById('name').value;
-  const className = document.getElementById('class').value;
+  const nameInput = document.getElementById('name');
+  const classInput = document.getElementById('class');
+  
+  if (!nameInput || !classInput) {
+      console.error("Form inputs not found!");
+      return;
+  }
+
+  const name = nameInput.value;
+  const className = classInput.value;
   const bgMusic = document.getElementById("bg-music");
-  bgMusic.volume = 0.3;
-  bgMusic.play().catch(e => console.log("Autoplay blocked:", e));
+  
+  if (bgMusic) {
+      bgMusic.volume = 0.3;
+      bgMusic.play().catch(e => console.log("Autoplay blocked:", e));
+  }
 
   if (name && className) {
     studentData.name = name;
     studentData.class = className;
     score = 0;
+    currentQuestionIndex = 0; // Reset index
     document.getElementById('quiz-form').style.display = 'none';
     document.getElementById('quiz-section').style.display = 'block';
-    showQuestion(0);
+    
+    // Initialize progress bar
+    const progressBar = document.getElementById('progress-bar');
+    if(progressBar) progressBar.style.width = "0%";
+    
+    showQuestion(currentQuestionIndex);
+  } else {
+      alert("Sila masukkan Nama dan Kelas.");
   }
 }
 
@@ -138,37 +160,85 @@ function showQuestion(index) {
   }
 
   const question = questions[index];
-  const quizContainer = document.getElementById('quiz-section');
+  const questionTextElement = document.getElementById('question-text');
+  const questionImageElement = document.getElementById('question-image');
+  const answerButtonsElement = document.getElementById('answer-buttons');
+  const nextButton = document.getElementById('next-btn');
+  const progressText = document.getElementById('progress-text');
+  const progressBar = document.getElementById('progress-bar');
 
-  let html = `<h2>${question.question}</h2>`;
+  // Update Progress
+  if (progressText) progressText.innerText = `Soalan ${index + 1} dari ${questions.length}`;
+  if (progressBar) {
+      let progressPercent = ((index) / questions.length) * 100;
+      progressBar.style.width = progressPercent + "%";
+  }
+
+  // Set Question Text
+  questionTextElement.innerText = question.question;
+
+  // Set Image
   if (question.image) {
-    html += `<img src="${question.image}" class="img-fluid rounded mb-3" style="max-height: 200px;">`;
-  }
-
-  question.choices.forEach(choice => {
-    html += `<button class="btn btn-outline-light btn-block mt-2" onclick="checkAnswer(${index}, '${choice}')">${choice}</button>`;
-  });
-
-  quizContainer.innerHTML = html;
-}
-
-function checkAnswer(index, selected) {
-  const isCorrect = selected === questions[index].answer;
-  if (isCorrect) score++;
-  handleAnswer(isCorrect);
-  showQuestion(index + 1);
-}
-
-function handleAnswer(isCorrect) {
-  const correctSound = document.getElementById("correct-sound");
-  const wrongSound = document.getElementById("wrong-sound");
-
-  if (isCorrect) {
-    correctSound.play();
+    questionImageElement.src = question.image;
+    questionImageElement.style.display = 'block';
   } else {
-    wrongSound.play();
+    questionImageElement.style.display = 'none';
   }
+
+  // Clear previous buttons
+  answerButtonsElement.innerHTML = '';
+
+  // Create Answer Buttons
+  question.choices.forEach(choice => {
+    const btn = document.createElement('button');
+    // Remove "A. ", "B. " etc for clean display if desired, or keep as is. 
+    // Keeping strictly as per your array logic:
+    btn.innerText = choice; 
+    btn.classList.add('btn', 'btn-option', 'w-100');
+    
+    // Check if this choice is the correct answer
+    if (choice === question.answer) {
+        btn.dataset.correct = "true";
+    } else {
+        btn.dataset.correct = "false";
+    }
+
+    btn.addEventListener('click', selectAnswer);
+    answerButtonsElement.appendChild(btn);
+  });
+  
+  if(nextButton) nextButton.style.display = 'none';
 }
+
+function selectAnswer(e) {
+    const selectedBtn = e.target;
+    const isCorrect = selectedBtn.dataset.correct === "true";
+    
+    const correctSound = document.getElementById("correct-sound");
+    const wrongSound = document.getElementById("wrong-sound");
+    const answerButtonsElement = document.getElementById('answer-buttons');
+    const nextButton = document.getElementById('next-btn');
+
+    if (isCorrect) {
+        selectedBtn.classList.add('btn-success');
+        score++;
+        if(correctSound) correctSound.play();
+    } else {
+        selectedBtn.classList.add('btn-danger');
+        if(wrongSound) wrongSound.play();
+    }
+
+    // Disable all buttons and highlight correct one
+    Array.from(answerButtonsElement.children).forEach(button => {
+        if (button.dataset.correct === "true") {
+            button.classList.add('btn-success');
+        }
+        button.disabled = true;
+    });
+
+    if(nextButton) nextButton.style.display = 'block';
+}
+
 
 // --- Leaderboard ---
 function saveLeaderboardEntry(name, className, score) {
@@ -180,21 +250,30 @@ function saveLeaderboardEntry(name, className, score) {
 
 function loadLeaderboard() {
   let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-  const leaderboardList = document.getElementById('leaderboard');
+  const leaderboardList = document.getElementById('leaderboard-list');
+  if(!leaderboardList) return;
+
   leaderboardList.innerHTML = '';
   leaderboard.forEach(entry => {
     const li = document.createElement('li');
-    li.className = 'list-group-item bg-transparent text-white';
-    li.textContent = `${entry.name} (${entry.className}) - Skor: ${entry.score}`;
+    li.className = 'list-group-item bg-transparent text-white d-flex justify-content-between align-items-center';
+    li.innerHTML = `
+        <div>
+            <i class="fas fa-user-graduate me-2"></i>
+            <strong>${entry.name}</strong> <small class="text-muted">(${entry.className})</small>
+        </div>
+        <span class="badge bg-warning text-dark rounded-pill">${entry.score} mata</span>
+    `;
     leaderboardList.appendChild(li);
   });
 }
 
 function showLeaderboard() {
-  const quizContainer = document.getElementById('quiz-section');
-  quizContainer.innerHTML = `<h2 class='text-center text-success'>Tahniah, ${studentData.name} dari ${studentData.class}!</h2>
-    <p class='text-center'>Skor anda: ${score}/${questions.length}</p>
-    <ul id="leaderboard" class="list-group mt-4"></ul>`;
+  document.getElementById('quiz-section').style.display = 'none';
+  document.getElementById('leaderboard-section').style.display = 'block';
+  
+  const progressBar = document.getElementById('progress-bar');
+  if(progressBar) progressBar.style.width = "100%";
 
   saveLeaderboardEntry(studentData.name, studentData.class, score);
   loadLeaderboard();
@@ -207,30 +286,22 @@ function resetLeaderboard() {
   }
 }
 
-function answerAgain() {
-  document.getElementById("name").value = "";
-  document.getElementById("class").value = "";
-  document.getElementById("quiz-form").style.display = "block";
-  document.getElementById("quiz-section").style.display = "none";
-  document.getElementById("quiz-section").innerHTML = "";
-  score = 0;
-}
-
-function initializeQuiz() {
-  document.getElementById("quiz-form").style.display = "block";
-  document.getElementById("quiz-section").style.display = "none";
-  document.getElementById("leaderboard-section").style.display = "none";
-  document.getElementById("retry-btn").style.display = "none";
-  document.getElementById("quiz-section").innerHTML = "";
-  
-  const bgMusic = document.getElementById("bg-music");
-  bgMusic.currentTime = 0;
-  bgMusic.play().catch(e => console.log("Autoplay blocked:", e));
-  
-  window.scrollTo(0, 0);
-}
-
-document.addEventListener('DOMContentLoaded', initializeQuiz);
-document.getElementById("start-button").addEventListener("click", () => {
-  document.getElementById("bg-music").play();
+// Initialize logic
+document.addEventListener('DOMContentLoaded', () => {
+    // Attach event listeners if elements exist
+    const quizForm = document.getElementById('student-info-form');
+    if (quizForm) {
+        quizForm.addEventListener('submit', e => {
+            e.preventDefault();
+            startQuiz();
+        });
+    }
+    
+    const nextButton = document.getElementById('next-btn');
+    if(nextButton) {
+        nextButton.addEventListener('click', () => {
+            currentQuestionIndex++;
+            showQuestion(currentQuestionIndex);
+        });
+    }
 });
