@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ms">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Piramid Nutriquest AR [Educator Set] - Nutrition Matters PJK</title>
+      <link rel="stylesheet" href="css/components.css">
+      <link rel="stylesheet" href="css/icons.css">
+      <link rel="stylesheet" href="css/responsee.css">
+      <link rel="stylesheet" href="owl-carousel/owl.carousel.css">
+      <link rel="stylesheet" href="owl-carousel/owl.theme.css">
+      <link rel="stylesheet" href="css/template-style.css">
+      <link href="https://fonts.googleapis.com/css?family=Barlow:100,300,400,700,800&subset=latin-ext" rel="stylesheet">  
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+      
+      <style>
+        body {
+          background-image: url('img/belakang.jpg');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+        }
+
+        /* Container Produk */
+        .product-detail-container {
+            background: rgba(255,255,255,0.98); /* Lebih legap supaya teks hitam nampak jelas */
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            color: #000000; /* Set warna asas container kepada hitam */
+        }
+
+        /* Gallery Styles */
+        .main-image-box {
+            width: 100%;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border: 1px solid #000; /* Border hitam */
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        .main-image-box img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            transition: transform 0.3s;
+        }
+        .thumbnail-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .thumbnail {
+            width: 70px;
+            height: 70px;
+            border: 2px solid #000; /* Border hitam */
+            border-radius: 8px;
+            cursor: pointer;
+            object-fit: cover;
+            transition: border-color 0.3s;
+        }
+        .thumbnail:hover, .thumbnail.active {
+            border-color: #e53935;
+        }
+
+        /* Product Info Styles - TULISAN HITAM DI SINI */
+        .product-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #000000 !important; /* HITAM PEKAT */
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        .product-description-text {
+            color: #000000; /* HITAM PEKAT */
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .product-price {
+            font-size: 2rem;
+            color: #e53935; /* Harga kekal merah untuk penegasan */
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .stock-status {
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        /* Cart Actions */
+        .cart-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .qty-input {
+            padding: 10px;
+            border: 2px solid #000; /* Border hitam */
+            border-radius: 30px;
+            width: 80px;
+            text-align: center;
+            font-weight: bold;
+            color: #000000; /* Input text hitam */
+        }
+        .btn-add-cart {
+            background: linear-gradient(to right, #e53935, #d32f2f);
+            color: white;
+            padding: 12px 40px;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(229, 57, 53, 0.4);
+        }
+        .btn-add-cart:hover {
+            transform: scale(1.05);
+            background: #000; /* Hover jadi hitam */
+            color: #fff;
+        }
+
+        /* Info Sections (Tabs style) */
+        .info-section {
+            margin-top: 40px;
+            border-top: 1px solid #000; /* Garis pemisah hitam */
+            padding-top: 30px;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #000000 !important; /* HITAM PEKAT */
+            margin-bottom: 20px;
+            border-left: 5px solid #e53935;
+            padding-left: 15px;
+        }
+        
+        /* Specs Table - TULISAN HITAM */
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #000000; /* Table text hitam */
+        }
+        .specs-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ccc;
+            color: #000000; /* Pastikan sel hitam */
+        }
+        .specs-table td:first-child {
+            font-weight: bold;
+            width: 30%;
+            color: #000000; /* Label spec hitam */
+        }
+
+        /* Delivery Info Box */
+        .delivery-box {
+            background: #fff0f0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px dashed #e53935;
+            color: #000000; /* Text dalam box hitam */
+        }
+        .delivery-box p {
+            color: #000000 !important;
+        }
+
+        /* Reviews */
+        .review-item {
+            background: #f0f0f0; /* Gelapkan sikit background review supaya teks hitam lebih naik */
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+        }
+        .reviewer-name { font-weight: bold; color: #000000; }
+        .review-stars { color: #f39c12; font-size: 0.9rem; }
+        .review-date { font-size: 0.8rem; color: #000000; } /* Tarikh hitam */
+        .review-text { color: #000000; margin-top: 10px; } /* Isi review hitam */
+
+        /* Helper classes overrides */
+        p { color: #000000 !important; }
+        strong { color: #000000 !important; }
+        li { color: #000000 !important; }
+
+      </style>
+   </head>
+
+   <body class="size-1520 primary-color-red background-dark">
+      <header class="grid">
+        <nav class="s-12 grid background-none background-primary-hightlight">
+         <a href="index.html" class="m-12 l-3 padding-2x logo">
+           <img src="img/Shine.png">
+         </a>
+         <div class="top-nav s-12 l-9">
+           <button class="hamburger-menu">☰</button>
+           <ul class="top-ul right chevron">
+             <li><a href="index.html">Laman Utama</a></li>
+             <li class="dropdown">
+                <a href="#">Inovasi</a>
+                <ul class="dropdown-menu">
+                  <li><a href="onlineshop.html">Kedai Dalam Talian</a></li>
+                </ul>
+              </li>
+              <li><a href="contact.html">Hubungi kami</a></li>
+           </ul>
+         </div>
+        </nav>
+      </header>
+      
+      <main role="main">
+        <section class="grid margin">
+            <div class="s-12 m-12 l-10 center product-detail-container">
+                <div class="grid">
+                    <div class="s-12 m-6 l-5 margin-bottom">
+                        <div class="main-image-box">
+                            <img id="mainImg" src="GAMBAR PRODUK/PRODUCTSCHOOLEDITION.png" alt="Piramid Nutriquest AR">
+                        </div>
+                        <div class="thumbnail-row">
+                            <img src="GAMBAR PRODUK/PRODUCTSCHOOLEDITION.png" class="thumbnail active" onclick="changeImage(this)">
+                            <img src="GAMBAR PRODUK/murid.jpg" class="thumbnail" onclick="changeImage(this)">
+                            <img src="GAMBAR PRODUK/Piramid whitebg.png" class="thumbnail" onclick="changeImage(this)">
+                            <img src="GAMBAR PRODUK/dadu whitebg.png" class="thumbnail" onclick="changeImage(this)">
+                            <img src="GAMBAR PRODUK/kad ar dan info whitebg.png" class="thumbnail" onclick="changeImage(this)">
+                            <img src="GAMBAR PRODUK/character whitebg.png" class="thumbnail" onclick="changeImage(this)">
+                            <img src="GAMBAR PRODUK/kad skema jawapan whitebg.png" class="thumbnail" onclick="changeImage(this)">
+                        </div>
+                    </div>
+
+                    <div class="s-12 m-6 l-7 padding-2x">
+                        <h1 class="product-title">Piramid Nutriquest AR x3 <br><span class="text-size-20 text-primary">[School/Institution Set]</span></h1>
+                        
+                        <div class="margin-bottom-10">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <span class="text-dark text-size-12"> (5 Review Pelanggan)</span>
+                        </div>
+
+                        <div class="product-price">RM 250.00</div>
+                        
+                        <p>Set lengkap alat bantu mengajar (ABM) inovatif yang menggabungkan teknologi Augmented Reality (AR) dengan pendidikan pemakanan. Sesuai untuk guru Pendidikan Jasmani dan Kesihatan untuk menarik minat pelajar memahami Piramid Makanan Malaysia.</p>
+                        
+                        <span class="stock-status"><i class="fas fa-check-circle"></i> Stok Tersedia (Ready Stock)</span>
+
+                        <div class="delivery-box">
+                            <p class="text-size-14"><i class="fas fa-truck margin-right-10"></i> <strong>Penghantaran:</strong> RM 8.00 (Semenanjung) / RM 15.00 (Sabah/Sarawak)</p>
+                            <p class="text-size-12 margin-top-10 text-gray">Dijangka sampai dalam 3-5 hari bekerja.</p>
+                        </div>
+
+                        <form action="cart.html" class="cart-actions">
+                            <input type="number" class="qty-input" value="1" min="1" max="50">
+                            <button type="button" class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Tambah Ke Troli</button>
+                        </form>
+
+                        <hr>
+                        <div class="margin-top-20">
+                            <p><strong>Kategori:</strong> Peralatan Inovasi, Sekolah</p>
+                            <p><strong>Tag:</strong> #NutriquestAR #PendidikanJasmani #Inovasi2025</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <div class="s-12">
+                        
+                        <div class="info-section">
+                            <h3 class="section-title">Deskripsi Produk</h3>
+                            <p>Piramid Nutriquest AR adalah solusi terkini untuk bilik darjah abad ke-21. Dengan menggunakan aplikasi khas, papan fizikal bertukar menjadi interaktif di mana pelajar boleh melihat model makanan 3D muncul di atas tapak tangan mereka.</p>
+                            <p class="margin-top-10"><strong>Kelebihan Set Educator:</strong></p>
+                            <ul class="margin-left-20" style="list-style-type: disc;">
+                                <li>Visualisasi 3D yang realistik untuk setiap kumpulan makanan.</li>
+                                <li>Kuiz interaktif terbina dalam aplikasi.</li>
+                                <li>Buku panduan guru (Rancangan Pengajaran Harian) disertakan.</li>
+                                <li>Tahan lasak dan mudah dibawa.</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-section">
+                            <h3 class="section-title">Spesifikasi (Specs)</h3>
+                            <table class="specs-table">
+                                <tr>
+                                    <td>Pakej Termasuk</td>
+                                    <td>1× Papan Utama NutriQuest AR, 1× Set Kad Imbasan AR Makanan, 1× Set Kad Kuiz & Aktiviti, 1× Set Watak Pemain (Character Tokens), 1× Dadu Interaktif, 1× Buku Panduan Guru / Manual Pengguna</td>
+                                </tr>
+                                <tr>
+                                    <td>Aplikasi Sokongan</td>
+                                    <td>Assemblr Studio Easy AR Maker</td>
+                                </tr>
+                                <tr>
+                                    <td>Bahasa</td>
+                                    <td>Bahasa Melayu</td>
+                                </tr>
+                                <tr>
+                                    <td>Berat</td>
+                                    <td>450g</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="info-section">
+                            <h3 class="section-title">Ulasan Pelanggan (Reviews)</h3>
+                            
+                            <div class="review-item">
+                                <div class="margin-bottom-5">
+                                    <span class="reviewer-name">Zainal bin Jusoh</span>
+                                    <span class="right review-date">2 minggu lepas</span>
+                                </div>
+                                <div class="review-stars">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <p class="margin-top-10">"Serius saya suka sangat dengan Piramid NutriQuest AR ni. Murid jadi lebih hidup dalam kelas, semua nak cuba imbas kad dan main papan tu. Mereka lebih cepat faham bab pemakanan sebab nampak sendiri dalam bentuk 3D. Memang banyak membantu saya mengajar."</p>
+                            </div>
+
+                            <div class="review-item">
+                                <div class="margin-bottom-5">
+                                    <span class="reviewer-name">Cik Liyana Hazmi</span>
+                                    <span class="right review-date">1 bulan lepas</span>
+                                </div>
+                                <div class="review-stars">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="margin-top-10">"Mula-mula saya tak sangka murid akan teruja macam tu, tapi bila keluarkan je set NutriQuest AR ni, semua jadi fokus. Kad AR dia menarik, senang guna, dan tak rumit. Murid pun seronok jawab kuiz."</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+      </main>
+       
+      <footer class="grid">
+        <div class="s-12 text-center margin-bottom padding-2x background-dark">
+          <p class="text-size-12 text-white">Copyright 2025, Vision Design - graphic zoo</p>
+          <p class="text-size-12 text-white">Untuk Tujuan Inovasi Pendidikan Jasmani</p>
+        </div>
+      </footer>
+      
+      <script type="text/javascript" src="js/responsee.js"></script>
+      <script type="text/javascript" src="js/template-scripts.js"></script>
+      
+  <script>
+      function changeImage(element) {
+          var mainImg = document.getElementById('mainImg');
+          mainImg.src = element.src;
+          var thumbnails = document.getElementsByClassName('thumbnail');
+          for (var i = 0; i < thumbnails.length; i++) {
+              thumbnails[i].classList.remove('active');
+          }
+          element.classList.add('active');
+      }
+
+      // --- KOD BARU UNTUK HANTAR DATA KE CART ---
+      document.querySelector('.btn-add-cart').addEventListener('click', function() {
+          
+          // 1. Ambil nilai kuantiti dari input
+          var quantity = document.querySelector('.qty-input').value;
+          
+          // 2. Buat data produk (Object)
+          var productData = {
+              name: "Piramid Nutriquest AR [School/Institution Set]",
+              price: 250.00,
+              image: "GAMBAR PRODUK/PRODUCTTEACHEREDITION.png",
+              qty: quantity // Masukkan kuantiti yang dipilih pengguna
+          };
+
+          // 3. Simpan ke dalam Local Storage pelayar
+          localStorage.setItem('userCart', JSON.stringify(productData));
+
+          // 4. Beritahu pengguna dan pindah ke cart.html
+          alert('Produk ditambah! Kuantiti: ' + quantity);
+          window.location.href = 'cart.html';
+      });
+      </script>
+   </body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en-US">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Kedai Dalam Talian - Nutrition Matters PJK</title>
+      <link rel="stylesheet" href="css/components.css">
+      <link rel="stylesheet" href="css/icons.css">
+      <link rel="stylesheet" href="css/responsee.css">
+      <link rel="stylesheet" href="owl-carousel/owl.carousel.css">
+      <link rel="stylesheet" href="owl-carousel/owl.theme.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
+      <link rel="stylesheet" href="css/template-style.css">
+      <link href="https://fonts.googleapis.com/css?family=Barlow:100,300,400,700,800&subset=latin-ext" rel="stylesheet">  
+      <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+      <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+      <script type="text/javascript" src="js/hamburger.js"></script>
+      
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+      <style>
+        body {
+          background-image: url('img/belakang.jpg');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+        }
+
+        /* --- NEW: CENTER PRODUCT LIST --- */
+        #productList {
+            display: flex;
+            justify-content: center; /* Centers items horizontally */
+            flex-wrap: wrap;
+            gap: 20px; /* Adds space between items */
+        }
+        
+        /* Override Responsee Float for Flexbox items */
+        .product-item {
+            float: none !important;
+        }
+
+        /* --- SHOP CARD STYLES --- */
+        .product-card {
+            position: relative; /* For badge positioning */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy effect */
+            border: none;
+            border-radius: 15px; /* Rounder corners */
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        /* Image Styling */
+        .product-image {
+            height: 220px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            border-bottom: 1px solid #eee;
+        }
+        .product-image img {
+            max-height: 90%;
+            width: auto;
+            transition: transform 0.5s ease;
+        }
+        .product-card:hover .product-image img {
+            transform: scale(1.1); /* Zoom image on hover */
+        }
+
+        /* Text Colors */
+        .product-card h4 {
+            color: #000000 !important; 
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .product-card p {
+            color: #555555; 
+            font-size: 0.9rem;
+        }
+        .star-rating {
+            color: #f39c12; /* Orange/Gold color for stars */
+            margin-bottom: 10px;
+        }
+        /* Price Tag */
+        .price-tag {
+            font-size: 1.5em;
+            font-weight: 800;
+            color: #e53935;
+            margin-bottom: 15px;
+            background: #fff0f0;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        /* Badges (New Feature) */
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 5;
+        }
+        .badge-hot { background: linear-gradient(45deg, #ff357a, #fff172); color: #333; }
+        .badge-best { background: linear-gradient(45deg, #00c6ff, #0072ff); }
+
+        /* Filters Styling */
+        .shop-filters {
+            background: rgba(255,255,255,0.95);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border: 1px solid rgb(255, 208, 0);
+        }
+        .filter-select {
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            width: 100%;
+            color: #333;
+            font-weight: bold;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        .filter-select:focus {
+            border-color: #e53935;
+            outline: none;
+        }
+
+        /* Add to Cart Button */
+        .btn-cart {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            text-align: center;
+            background: #e53935;
+            background: linear-gradient(to right, #e53935, #d32f2f);
+            color: white;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px; /* Pill shape */
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(229, 57, 53, 0.4);
+        }
+        .btn-cart:hover {
+            background: #333;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        /* Shop Features Bar */
+        .shop-features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .feature-item {
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+      </style>
+   </head>
+
+   <body class="size-1520 primary-color-red background-dark">
+      <header class="grid">
+      <nav class="s-12 grid background-none background-primary-hightlight">
+       <a href="index.html" class="m-12 l-3 padding-2x logo">
+          <img src="img/Shine.png">
+       </a>
+            <div class="top-nav s-12 l-9">
+             <button class="hamburger-menu">☰</button>
+             <ul class="top-ul right chevron">
+                <li><a href="index.html">Laman Utama</a></li>
+                <li class="dropdown">
+                  <a href="#">Sumber pemakanan</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="Notapemakanan.html">Pemakanan Makronutrien & Mikronutrien</a></li>
+                    <li><a href="https://cookpad.com/my/search/sihat">Resepi Makanan Sihat</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=WqD2xv-4S9g">Pinggan Sihat Malaysia</a></li>
+                    <li><a href="https://www2.moh.gov.my/index.php/pages/view/2725">Piramid Makanan Malaysia</a></li>
+                    <li><a href="https://www.calculator.net/calorie-calculator.html">Kalkulator Kalori</a></li>
+                    <li><a href="cadangan latihan.html">Cadangan Latihan</a></li>
+                    <li><a href="kuiz.html">Kuiz Pemakanan</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                  <a href="#">Inovasi</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="inovasi.html">Inovasi Karnival Pengajian Pendidikan 2025</a></li>
+                    <li><a href="eduinnovate.html">Edu Innovate 2025</a></li>
+                    <li><a href="sportsinnochal.html">USM-AUSC International Sports Innovation Challenge 2025</a></li>
+                    <li><a href="feedback.html">Maklum Balas</a></li>
+                    <li><a href="onlineshop.html">Kedai Dalam Talian</a></li>
+                  </ul>
+                </li>
+                <li><a href="maklumatguru.html">Maklumat Guru</a></li>
+                <li><a href="contact.html">Hubungi kami</a></li>
+            </ul>
+           </div>
+         </nav>
+      </header>
+      
+      <main role="main">
+        
+        <section class="grid margin text-center">
+            <div class="s-12 margin-bottom">
+                <h2 class="text-strong text-size-50 text-white text-uppercase margin-top-50">Kedai Dalam Talian</h2>
+                <p class="text-white">Dapatkan peralatan inovasi AR dan panduan pemakanan terkini.</p>
+                
+                <div class="shop-features margin-top-20">
+                    <div class="feature-item"><i class="fas fa-truck"></i> Penghantaran Pantas</div>
+                    <div class="feature-item"><i class="fas fa-shield-alt"></i> Pembayaran Selamat</div>
+                    <div class="feature-item"><i class="fas fa-medal"></i> Kualiti Terjamin</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid">
+            <div class="s-12 m-10 l-8 center shop-filters">
+                <div class="grid">
+                    <div class="s-12 m-6 margin-bottom-10">
+                        <label><b><i class="fas fa-filter"></i> Kategori:</b></label>
+                        <select id="categoryFilter" class="filter-select" onchange="filterProducts()">
+                            <option value="all">Semua Produk</option>
+                            <option value="equipment">Peralatan Inovasi (AR)</option>
+                            <option value="books">Pakej Sekolah</option>
+                            <option value="supplement">Makanan Tambahan</option>
+                        </select>
+                    </div>
+                    
+                    <div class="s-12 m-6 margin-bottom-10">
+                        <label><b><i class="fas fa-sort-amount-down"></i> Susun Harga:</b></label>
+                        <select id="priceSort" class="filter-select" onchange="sortProducts()">
+                            <option value="default">Pilihan</option>
+                            <option value="low">Rendah ke Tinggi</option>
+                            <option value="high">Tinggi ke Rendah</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid margin" id="productList">
+            
+            <div class="s-12 m-6 l-3 margin-bottom product-item" data-category="equipment" data-price="99">
+                <div class="padding-2x background-white product-card">
+                    <span class="badge badge-hot">Hot Selling</span>
+                    
+                    <div class="product-image">
+                        <img src="GAMBAR PRODUK/PRODUCTTEACHEREDITION.png" alt="Piramid Nutriquest AR">
+                    </div>
+                    <div class="text-center margin-top-20">
+                        <h4 class="text-strong text-size-20 margin-bottom-10">Piramid Nutriquest AR</h4>
+                        <div class="star-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="text-size-12 text-dark">(5.0)</span>
+                        </div>
+                        <p class="margin-bottom-10 text-uppercase text-size-12" style="letter-spacing: 1px;">[Educator Set]</p>
+                        <div class="price-tag">RM 99.00</div>
+                        <a href="producteducatored.html" class="btn-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="s-12 m-6 l-3 margin-bottom product-item" data-category="books" data-price="250">
+                <div class="padding-2x background-white product-card">
+                     <span class="badge badge-best">Best Value</span>
+
+                    <div class="product-image">
+                        <img src="GAMBAR PRODUK/PRODUCTSCHOOLEDITION.png" alt="School Pack">
+                    </div>
+                    <div class="text-center margin-top-20">
+                        <h4 class="text-strong text-size-20 margin-bottom-10">School Pack (x3 Sets)</h4>
+                        <div class="star-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span class="text-size-12 text-dark">(4.0)</span>
+                        </div>
+                        <p class="margin-bottom-10 text-uppercase text-size-12" style="letter-spacing: 1px;">[School/Institution]</p>
+                        <div class="price-tag">RM 250.00</div>
+                        <a href="productschooled.html" class="btn-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+      </main>
+       
+      <footer class="grid">
+        <br><div class="s-12 l-3 m-row-3 margin-bottom background-image" style="background-image:url(img/fakulti.jpg)"></div>
+        <div class="s-12 m-9 l-3 padding-2x margin-bottom background-dark">
+           <h2 class="text-strong text-uppercase">Siapa kami?</h2>
+           <p>Kami adalah pelajar semester 5 dalam bidang Pendidikan Jasmani di bawah Fakulti Sains Sukan dan Kejurulatihan, komited untuk mendalami ilmu sukan, kesihatan, dan kejurulatihan demi membentuk generasi yang sihat dan aktif.</p>
+        </div>
+        
+        <div class="s-12 text-center margin-bottom">
+          <p class="text-size-12 text-white">Copyright 2025, Vision Design - graphic zoo</p>
+          <p class="text-size-12 text-white">Untuk Tujuan Inovasi Pendidikan Jasmani</p>
+          <p><a class="text-size-12 text-white text-primary-hover" href="http://www.myresponsee.com" title="Responsee - lightweight responsive framework">Design and coding oleh Ahli kumpulan Inovasi FSSK</a></p>
+        </div>
+      </footer>                                                                      
+      <script type="text/javascript" src="js/responsee.js"></script>
+      <script type="text/javascript" src="owl-carousel/owl.carousel.js"></script>
+      <script type="text/javascript" src="js/template-scripts.js"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+      
+      <script>
+        function filterProducts() {
+            var category = document.getElementById("categoryFilter").value;
+            var items = document.getElementsByClassName("product-item");
+
+            for (var i = 0; i < items.length; i++) {
+                var itemCat = items[i].getAttribute("data-category");
+                var showCat = (category === "all" || category === itemCat);
+
+                if (showCat) {
+                    items[i].style.display = "block";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        function sortProducts() {
+            var sortValue = document.getElementById("priceSort").value;
+            var list = document.getElementById("productList");
+            var items = Array.from(list.getElementsByClassName("product-item"));
+
+            items.sort(function(a, b) {
+                var priceA = parseFloat(a.getAttribute("data-price"));
+                var priceB = parseFloat(b.getAttribute("data-price"));
+
+                if (sortValue === "low") {
+                    return priceA - priceB;
+                } else if (sortValue === "high") {
+                    return priceB - priceA;
+                } else {
+                    return 0; // Default order
+                }
+            });
+
+            // Reorder DOM
+            items.forEach(function(item) {
+                list.appendChild(item);
+            });
+        }
+      </script>
+   </body>
+</html>

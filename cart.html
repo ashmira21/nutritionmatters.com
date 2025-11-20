@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ms">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Troli Belanja - Nutrition Matters PJK</title>
+      <link rel="stylesheet" href="css/components.css">
+      <link rel="stylesheet" href="css/icons.css">
+      <link rel="stylesheet" href="css/responsee.css">
+      <link rel="stylesheet" href="owl-carousel/owl.carousel.css">
+      <link rel="stylesheet" href="owl-carousel/owl.theme.css">
+      <link rel="stylesheet" href="css/template-style.css">
+      <link href="https://fonts.googleapis.com/css?family=Barlow:100,300,400,700,800&subset=latin-ext" rel="stylesheet">  
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+      
+      <style>
+        body {
+          background-image: url('img/belakang.jpg');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+        }
+        .cart-container {
+            background: rgba(255,255,255,0.98);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            color: #000000;
+        }
+        .page-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #000000;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e53935;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .cart-table th {
+            text-align: left;
+            padding: 15px;
+            background-color: #f8f8f8;
+            font-weight: 800;
+            color: #000;
+            border-bottom: 2px solid #ddd;
+        }
+        .cart-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+            color: #000;
+        }
+        .product-thumb {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .product-name-link {
+            color: #000;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        .qty-input {
+            padding: 8px;
+            border: 2px solid #000;
+            border-radius: 20px;
+            width: 60px;
+            text-align: center;
+            font-weight: bold;
+            color: #000;
+        }
+        .btn-remove {
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+        }
+        .btn-remove:hover { color: #e53935; }
+        .cart-summary {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #ddd;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: #000;
+        }
+        .summary-total {
+            border-top: 2px solid #000;
+            padding-top: 15px;
+            margin-top: 15px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #e53935;
+        }
+        .btn-checkout {
+            display: block;
+            width: 100%;
+            background: linear-gradient(to right, #e53935, #d32f2f);
+            color: white;
+            padding: 15px;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(229, 57, 53, 0.4);
+            margin-top: 20px;
+            text-decoration: none;
+        }
+        .btn-checkout:hover {
+            transform: scale(1.02);
+            background: #000;
+            color: #fff;
+        }
+        .btn-continue {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #555;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .btn-continue:hover { color: #e53935; text-decoration: underline; }
+        
+        @media screen and (max-width: 768px) {
+            .cart-table thead { display: none; }
+            .cart-table tr { display: block; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 10px; padding: 10px; }
+            .cart-table td { display: flex; justify-content: space-between; align-items: center; border-bottom: none; padding: 5px 10px; }
+            .cart-table td::before { content: attr(data-label); font-weight: bold; color: #555; margin-right: 10px;}
+        }
+      </style>
+   </head>
+
+   <body class="size-1520 primary-color-red background-dark">
+      <header class="grid">
+        <nav class="s-12 grid background-none background-primary-hightlight">
+         <a href="index.html" class="m-12 l-3 padding-2x logo">
+           <img src="img/Shine.png">
+         </a>
+         <div class="top-nav s-12 l-9">
+           <button class="hamburger-menu">☰</button>
+           <ul class="top-ul right chevron">
+             <li><a href="index.html">Laman Utama</a></li>
+             <li class="dropdown">
+                <a href="#">Inovasi</a>
+                <ul class="dropdown-menu">
+                  <li><a href="onlineshop.html">Kedai Dalam Talian</a></li>
+                </ul>
+              </li>
+              <li><a href="contact.html">Hubungi kami</a></li>
+           </ul>
+         </div>
+        </nav>
+      </header>
+      
+      <main role="main">
+        <section class="grid margin">
+            <div class="s-12 m-12 l-10 center cart-container">
+                <h1 class="page-title">Troli Belanja Anda</h1>
+
+                <div class="grid">
+                    <div class="s-12 l-8 margin-bottom">
+                        <table class="cart-table">
+                            <thead>
+                                <tr>
+                                    <th width="15%">Produk</th>
+                                    <th width="35%">Nama Item</th>
+                                    <th width="15%">Harga</th>
+                                    <th width="15%">Kuantiti</th>
+                                    <th width="15%">Jumlah</th>
+                                    <th width="5%"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="cartItems">
+                                </tbody>
+                        </table>
+                    </div>
+
+                    <div class="s-12 l-4">
+                        <div class="cart-summary">
+                            <h3 style="color: #000; font-weight:bold; margin-bottom:20px;">Ringkasan Pesanan</h3>
+                            <div class="summary-row">
+                                <span>Subtotal</span>
+                                <span>RM <span id="subtotal">0.00</span></span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Penghantaran</span>
+                                <span>RM <span id="shipping">0.00</span></span>
+                            </div>
+                            <div class="summary-row summary-total">
+                                <span>Jumlah Besar</span>
+                                <span>RM <span id="grandTotal">0.00</span></span>
+                            </div>
+                            <p style="font-size: 12px; margin-top: 10px; color: #555;">*Kos penghantaran dikira berdasarkan alamat Semenanjung.</p>
+                            <a href="checkout.html" class="btn-checkout">
+                                Checkout <i class="fas fa-arrow-right margin-left-10"></i>
+                            </a>
+                            <a href="onlineshop.html" class="btn-continue">
+                                <i class="fas fa-chevron-left"></i> Teruskan Membeli-belah
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+      </main>
+       
+      <footer class="grid">
+        <div class="s-12 text-center margin-bottom padding-2x background-dark">
+          <p class="text-size-12 text-white">Copyright 2025, Vision Design - graphic zoo</p>
+          <p class="text-size-12 text-white">Untuk Tujuan Inovasi Pendidikan Jasmani</p>
+        </div>
+      </footer>
+      
+      <script type="text/javascript" src="js/responsee.js"></script>
+      <script type="text/javascript" src="js/template-scripts.js"></script>
+      
+      <script>
+        function updateCartTotal() {
+            var cartRows = document.getElementsByClassName('cart-row');
+            var subtotal = 0;
+
+            for (var i = 0; i < cartRows.length; i++) {
+                var row = cartRows[i];
+                var priceElement = row.querySelector('.unit-price');
+                var qtyElement = row.querySelector('.qty-input');
+                var totalElement = row.querySelector('.item-total');
+                
+                var price = parseFloat(priceElement.innerText);
+                var quantity = qtyElement.value;
+                
+                var total = price * quantity;
+                totalElement.innerText = total.toFixed(2);
+                subtotal += total;
+            }
+
+            var shippingCost = subtotal > 0 ? 8.00 : 0; // Jika tiada barang, kos RM0
+            var grandTotal = subtotal + shippingCost;
+
+            document.getElementById('subtotal').innerText = subtotal.toFixed(2);
+            document.getElementById('shipping').innerText = shippingCost.toFixed(2);
+            document.getElementById('grandTotal').innerText = grandTotal.toFixed(2);
+        }
+
+        function removeRow(btn) {
+            // Kosongkan local storage dan buang baris
+            localStorage.removeItem('userCart');
+            var row = btn.parentNode.parentNode;
+            row.remove();
+            updateCartTotal();
+            
+            // Tunjuk pesan kosong
+            var tbody = document.getElementById('cartItems');
+            if(tbody.children.length === 0) {
+                 tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:20px;">Troli anda kosong.</td></tr>';
+            }
+        }
+
+        // --- FUNGSI UTAMA: JALANKAN BILA HALAMAN LOAD ---
+        window.onload = function() {
+            
+            // 1. Ambil data dari Local Storage
+            var storedData = localStorage.getItem('userCart');
+            var tbody = document.getElementById('cartItems');
+
+            if (storedData) {
+                // 2. Jika ada data, tukar kepada format JSON
+                var product = JSON.parse(storedData);
+
+                // 3. Masukkan HTML row ke dalam jadual menggunakan data tersebut
+                var rowHTML = `
+                    <tr class="cart-row">
+                        <td data-label="Produk">
+                            <img src="${product.image}" class="product-thumb">
+                        </td>
+                        <td data-label="Nama Item">
+                            <a href="#" class="product-name-link">${product.name}</a>
+                        </td>
+                        <td data-label="Harga">RM <span class="unit-price">${product.price.toFixed(2)}</span></td>
+                        <td data-label="Kuantiti">
+                            <input type="number" class="qty-input" value="${product.qty}" min="1" onchange="updateCartTotal()">
+                        </td>
+                        <td data-label="Jumlah" style="font-weight:bold; color:#e53935;">RM <span class="item-total">0.00</span></td>
+                        <td data-label="Buang"><button class="btn-remove" onclick="removeRow(this)"><i class="fas fa-trash"></i></button></td>
+                    </tr>
+                `;
+                
+                tbody.innerHTML = rowHTML;
+            } else {
+                // Jika tiada data
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:20px;">Troli anda kosong. Sila tambah produk.</td></tr>';
+            }
+
+            // 4. Jalankan kiraan harga
+            updateCartTotal();
+        };
+      </script>
+
+   </body>
+</html>
