@@ -2,86 +2,262 @@
 <html lang="en-US">
 <head>
    <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
    <title>Website Inventors</title>
+   
    <link rel="stylesheet" href="css/components.css">
    <link rel="stylesheet" href="css/icons.css">
    <link rel="stylesheet" href="css/responsee.css">
    <link rel="stylesheet" href="css/template-style.css">
+   
+   <link rel="stylesheet" href="owl-carousel/owl.carousel.css">
+   <link rel="stylesheet" href="owl-carousel/owl.theme.css">
+   
    <link href="https://fonts.googleapis.com/css?family=Barlow:100,300,400,700,800&subset=latin-ext" rel="stylesheet">
+   
    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
    <script type="text/javascript" src="js/jquery-ui.min.js"></script>    
+   <script type="text/javascript" src="owl-carousel/owl.carousel.js"></script>
+
    <script>
-  window.addEventListener('DOMContentLoaded', function () {
-    const audio = document.getElementById('bg-music');
-    audio.play().catch(function(error) {
-      // Autoplay might be blocked, especially on mobile or if not user-triggered
-      console.log("Autoplay blocked. Waiting for user interaction...");
-    });
-  });
-</script>
+     window.addEventListener('DOMContentLoaded', function () {
+       const audio = document.getElementById('bg-music');
+       if(audio) {
+           audio.play().catch(function(error) {
+             console.log("Autoplay blocked. Waiting for user interaction...");
+           });
+       }
+     });
+   </script>
 
    <style>
-        /* Add this to your CSS file or inside a <style> tag in the <head> section */
-        body {
-          background-image: url('img/belakang.jpg'); /* Replace with your image path */
-          background-size: cover; /* Ensures the image covers the entire screen */
-          background-position: center; /* Centers the image */
-          background-repeat: no-repeat; /* Prevents the image from repeating */
-          background-attachment: fixed; /* Keeps the background fixed during scrolling */
-        }
-      .inventor-img {
-         .inventor-img {
-      width: 200px; /* Adjust image size for smaller devices */
-      height: auto; /* Maintain aspect ratio */
-   }
-      }</style>
-<style>
-   .flex-container-center {
-      display: flex;
-      justify-content: center; /* Center the bottom two items */
-      gap: 70px; /* Space between Inventor 4 and 5 */
-   }
-</style>
+      /* Background Defaults */
+      body {
+         background-image: url('img/belakang.jpg'); 
+         background-size: cover; 
+         background-position: center; 
+         background-repeat: no-repeat; 
+         background-attachment: fixed; 
+         overflow-x: hidden;
+      }
+
+      /* --- SLIDER CONTAINER --- */
+      /* Changed ID to match new HTML */
+      #hero-slider {
+          max-width: 1100px; 
+          width: 100%;
+          margin: 0 auto;
+          display: block;
+      }
+
+      /* Style for individual slider item */
+      #hero-slider .item {
+          width: 100%; 
+          display: block;
+          padding: 15px; 
+          box-sizing: border-box;
+      }
+
+      /* --- CARD STYLES (Desktop Default) --- */
+      .inventor-full-card {
+          display: flex;
+          flex-direction: row; 
+          width: 100%;
+          background-color: #ffffff;
+          border-radius: 15px;
+          overflow: hidden;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+          min-height: 500px; 
+      }
+
+      /* Left Side: Text Area */
+      .info-side {
+          flex: 1; 
+          padding: 50px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          text-align: left;
+          background: #fff;
+          z-index: 2;
+      }
+
+      /* Right Side: Photo Area */
+      .photo-side {
+          flex: 1; 
+          position: relative;
+          min-height: 100%;
+          background-color: #f4f4f4; 
+          overflow: hidden; 
+      }
+
+      .photo-side img {
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: cover; 
+          object-position: center top;
+          display: block;
+      }
+
+      /* --- TYPOGRAPHY --- */
+      .chat-bubble {
+          background-color: #e53935;
+          color: #ffffff !important;
+          padding: 8px 20px;
+          border-radius: 20px 20px 20px 0;
+          font-weight: bold;
+          font-size: 0.9rem;
+          margin-bottom: 15px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+      }
+
+      .inventor-name {
+          color: #000000 !important;
+          font-size: 3rem;
+          font-weight: 800;
+          line-height: 1.1;
+          margin-bottom: 10px;
+          text-transform: uppercase;
+      }
+
+      .inventor-role {
+          color: #555555 !important;
+          font-size: 1.3rem;
+          margin-bottom: 25px;
+          font-weight: 400;
+      }
+      
+      .inventor-role span {
+          color: #e53935;
+          font-weight: 700;
+      }
+
+      .quote-area {
+          border-left: 5px solid #e53935;
+          padding-left: 20px;
+          margin-top: 10px;
+      }
+
+      .quote-text {
+          font-size: 1.1rem;
+          font-style: italic;
+          color: #333333 !important;
+          line-height: 1.5;
+      }
+
+      .btn-profile {
+          background: #000;
+          color: #fff !important;
+          padding: 12px 30px;
+          border-radius: 50px;
+          text-decoration: none;
+          font-weight: bold;
+          margin-top: 30px;
+          display: inline-block;
+          transition: 0.3s;
+      }
+      .btn-profile:hover {
+          background: #e53935;
+      }
+
+      /* --- RESPONSIVE DESIGN (Phone & Tablet) --- */
+      @media screen and (max-width: 1024px) {
+          
+          body {
+              background-attachment: scroll;
+          }
+
+          #hero-slider .item {
+              height: auto !important; 
+              min-height: auto !important;
+          }
+
+          /* Stack Content: Image Top, Text Bottom */
+          .inventor-full-card {
+              flex-direction: column-reverse; 
+              height: auto;
+              width: 95%;
+              margin: 0 auto;
+          }
+          
+          .photo-side {
+              height: 300px; 
+              width: 100%;
+              flex: none; 
+              background-color: #e0e0e0;
+          }
+
+          /* PREVENT ZOOM: Use 'contain' to show full face on mobile */
+          .photo-side img {
+              object-fit: contain !important; 
+              object-position: center bottom; 
+              width: 100% !important;
+              height: 100% !important;
+          }
+          
+          .info-side {
+              flex: none;
+              width: 100%;
+              padding: 30px 20px;
+              align-items: center;
+              text-align: center;
+          }
+          
+          .inventor-name {
+              font-size: 2rem;
+          }
+
+          .quote-area {
+              border-left: none;
+              border-top: 3px solid #e53935;
+              padding-left: 0;
+              padding-top: 15px;
+          }
+      }
    </style>
 </head>
+
 <body class="size-1520 primary-color-red background-dark">
-   <!-- HEADER -->
    <header class="grid">
-     <!-- Top Navigation -->
-     <nav class="s-12 grid background-none background-primary-hightlight">
-        <!-- logo -->
+      <nav class="s-12 grid background-none background-primary-hightlight">
         <a href="index.html" class="m-12 l-3 padding-2x logo">
            <img src="img/Shine.png">
         </a>
         <div class="top-nav s-12 l-9">
-         <!-- Hamburger Menu Button for Mobile -->
          <button class="hamburger-menu">☰</button>
          <ul class="top-ul right chevron">
-           <li><a href="index.html">Laman Utama</a></li>
-           <li class="dropdown">
-             <a href="#">Sub Topik</a>
-             <ul class="dropdown-menu">
-                  <li><a href="Notapemakanan.html">Pemakanan Makronutrien & Mikronutrien</a></li>
-                  <li><a href="https://cookpad.com/my/search/sihat">Resepi Makanan Sihat</a></li>
-                  <li><a href="https://www.youtube.com/watch?v=WqD2xv-4S9g">Pinggan Sihat Malaysia</a></li>
-                  <li><a href="https://www2.moh.gov.my/index.php/pages/view/2725">Piramid Makanan Malaysia</a></li>
-                  <li><a href="https://www.calculator.net/calorie-calculator.html">Kalkulator Kalori</a></li>
-                  <li><a href="cadangan latihan.html">Cadangan Latihan</a></li>
-                  <li><a href="kuiz.html">Kuiz Pemakanan</a></li>
-                  <li><a href="inovasi.html">Inovasi Karnival Pengajian Pendidikan 2025</a></li>
-                  <li><a href="eduinnovate.html">Edu Innovate 2025</a></li>
-                  <li><a href="feedback.html">Maklum Balas</a></li>
-             </ul>
-           </li>
-           <li><a href="maklumatguru.html">Maklumat Guru</a></li>
-           <li><a href="contact.html">Hubungi kami</a></li>
+            <li><a href="index.html">Laman Utama</a></li>
+            <li class="dropdown">
+              <a href="#">Sumber pemakanan</a>
+              <ul class="dropdown-menu">
+                <li><a href="Notapemakanan.html">Pemakanan Makronutrien & Mikronutrien</a></li>
+                <li><a href="https://cookpad.com/my/search/sihat">Resepi Makanan Sihat</a></li>
+                <li><a href="https://www.youtube.com/watch?v=WqD2xv-4S9g">Pinggan Sihat Malaysia</a></li>
+                <li><a href="https://www2.moh.gov.my/index.php/pages/view/2725">Piramid Makanan Malaysia</a></li>
+                <li><a href="https://www.calculator.net/calorie-calculator.html">Kalkulator Kalori</a></li>
+                <li><a href="cadangan latihan.html">Cadangan Latihan</a></li>
+                <li><a href="kuiz.html">Kuiz Pemakanan</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#">Inovasi</a>
+              <ul class="dropdown-menu">
+                <li><a href="inovasi.html">Inovasi Karnival Pengajian Pendidikan 2025</a></li>
+                <li><a href="eduinnovate.html">Edu Innovate 2025</a></li>
+                <li><a href="sportsinnochal.html">USM-AUSC International Sports Innovation Challenge 2025</a></li>
+                <li><a href="feedback.html">Maklum Balas</a></li>
+                <li><a href="onlineshop.html">Kedai Dalam Talian</a></li>
+              </ul>
+            </li>
+            <li><a href="maklumatguru.html">Maklumat Guru</a></li>
+            <li><a href="contact.html">Hubungi kami</a></li>
          </ul>
-       </div>
-     </nav>
+        </div>
+      </nav>
    </header>
    
-   <!-- MAIN CONTENT -->
    <main role="main">
       <header class="grid">
          <div class="s-12 padding-2x">
@@ -90,57 +266,175 @@
          </div>
       </header>
       
-      <section class="grid margin padding-2x">
-         <!-- Inventor 1 -->
-         <div class="s-12 m-6 l-4 margin-bottom" style="background-color: #002633; padding: 20px; border-radius: 10px;">
-            <img class="inventor-img" src="img/haziq.png" alt="Inventor 1">
-            <h3 class="text-strong text-white text-center text-size-25 margin-top-10">NURHAZIQ HAIKAL NAJMIE BIN NORAZI</h3>
-            <p class="text-white text-center" style="font-size: 18px;">[KETUA KUMPULAN] <BR>PEMBANGUN RPH, POSTER DAN SLIDE.</p>
-         </div>
+      <section class="grid margin">
          
-         <!-- Inventor 2 -->
-         <div class="s-12 m-6 l-4 margin-bottom" style="background-color: #002633; padding: 20px; border-radius: 10px;">
-            <img class="inventor-img" src="img/drrozaireen.png" alt="Inventor 2">
-            <h3 class="text-strong text-white text-center text-size-25 margin-top-10">DR ROZAIREEN BIN MUSZALI</h3>
-            <p class="text-white text-center" style="font-size: 18px;">PENSYARAH KPD3016 & PENASIHAT.</p>
-         </div>
-         <!-- Inventor 3 -->
-         <div class="s-12 m-6 l-4 margin-bottom" style="background-color: #002633; padding: 20px; border-radius: 10px;">
-            <img class="inventor-img" src="img/ash.png" alt="Inventor 2">
-            <h3 class="text-strong text-white text-center text-size-25 margin-top-10">NURASHMIRA SYAZWANI BT MOHAMAD NASIR</h3>
-            <p class="text-white text-center" style="font-size: 18px;">PEMBANGUN LAMAN SESAWANG.</p>
-         </div>
-         <!-- Inventor 4 -->
-         <div class="s-12 m-6 l-4 margin-bottom" style="background-color: #002633; padding: 20px; border-radius: 10px;">
-            <img class="inventor-img" src="img/assman.png" alt="Inventor 3">
-            <h3 class="text-strong text-white text-center text-size-25 margin-top-10">ASSMAN RAZIQ BIN MOHD NASIR</h3>
-            <p class="text-white text-center" style="font-size: 18px;">PEREKA NUTRIQUEST AR.</p>
-         </div>
-         <!-- Inventor 5 -->
-         <div class="s-12 m-6 l-4 margin-bottom" style="background-color: #002633; padding: 20px; border-radius: 10px;">
-            <img class="inventor-img" src="img/pokjad.png" alt="Inventor 4">
-            <h3 class="text-strong text-white text-center text-size-25 margin-top-10">MUHAMMAD AIZAD NAJMI BIN ZUHAIRI</h3>
-            <p class="text-white text-center" style="font-size: 18px;">PEMBANGUN NUTRIQUEST AR.</p>
-         </div>
-         <!-- Inventor 5 -->
-         <div class="s-12 m-6 l-4 margin-bottom" style="background-color: #002633; padding: 20px; border-radius: 10px;">
-            <img class="inventor-img" src="img/ammar.png" alt="Inventor 5">
-            <h3 class="text-strong text-white text-center text-size-25 margin-top-10">NIK MUHAMMAD AMMAR FIRDAUS</h3>
-            <p class="text-white text-center" style="font-size: 18px;">PEMBANGUN & PEREKA NUTRIQUEST AR.</p>
+         <div id="hero-slider" class="owl-carousel owl-theme">
+            
+            <div class="item">
+               <div class="inventor-full-card">
+                  <div class="info-side">
+                     <div class="chat-bubble">Ketua Kumpulan</div>
+                     <h2 class="inventor-name">Nurhaziq Haikal</h2>
+                     <p class="inventor-role">Pembangun <span>RPH, Poster & Slide</span></p>
+                     <div class="quote-area">
+                        <p class="quote-text">"Inovasi bermula dengan satu langkah kecil yang berani untuk mengubah masa depan pendidikan."</p>
+                     </div>
+                  </div>
+                  <div class="photo-side">
+                     <img src="img/haziq.png" alt="Haziq">
+                  </div>
+               </div>
+            </div>
+
+            <div class="item">
+               <div class="inventor-full-card">
+                  <div class="info-side">
+                     <div class="chat-bubble">Penasihat</div>
+                     <h2 class="inventor-name">Dr Rozaireen</h2>
+                     <p class="inventor-role">Pensyarah <span>KPD3016</span></p>
+                     <div class="quote-area">
+                        <p class="quote-text">"Pendidikan adalah senjata paling ampuh yang boleh anda gunakan untuk mengubah dunia."</p>
+                     </div>
+                  </div>
+                  <div class="photo-side">
+                     <img src="img/drrozaireen.png" alt="Dr Rozaireen">
+                  </div>
+               </div>
+            </div>
+
+            <div class="item">
+               <div class="inventor-full-card">
+                  <div class="info-side">
+                     <div class="chat-bubble">Pensyarah Penasihat</div>
+                     <h2 class="inventor-name">Dr. Faiznur</h2>
+                     <p class="inventor-role">Pensyarah <span></span></p>
+                     <div class="quote-area">
+                        <p class="quote-text">"Cara terbaik untuk meramalkan masa depan adalah dengan menciptanya."</p>
+                     </div>
+                  </div>
+                  <div class="photo-side">
+                     <img src="img/drfaiznur.png" alt="Dr. Faiznur">
+                  </div>
+               </div>
+            </div>
+
+            <div class="item">
+               <div class="inventor-full-card">
+                  <div class="info-side">
+                     <div class="chat-bubble">Web Developer</div>
+                     <h2 class="inventor-name">Nurashmira Syazwani</h2>
+                     <p class="inventor-role">Pembangun <span>Laman Sesawang</span></p>
+                     <div class="quote-area">
+                        <p class="quote-text">"Kod komputer adalah seni yang memberi nyawa kepada idea-idea kreatif."</p>
+                     </div>
+                  </div>
+                  <div class="photo-side">
+                     <img src="img/ash.png" alt="Ashmira">
+                  </div>
+               </div>
+            </div>
+
+            <div class="item">
+               <div class="inventor-full-card">
+                  <div class="info-side">
+                     <div class="chat-bubble">Designer</div>
+                     <h2 class="inventor-name">Assman Raziq</h2>
+                     <p class="inventor-role">Pereka <span>NutriQuest AR</span></p>
+                     <div class="quote-area">
+                        <p class="quote-text">"Kreativiti adalah melihat apa yang orang lain lihat dan memikirkan apa yang tidak pernah difikirkan oleh orang lain."</p>
+                     </div>
+                  </div>
+                  <div class="photo-side">
+                     <img src="img/assman.png" alt="Assman">
+                  </div>
+               </div>
+            </div>
+
+            <div class="item">
+               <div class="inventor-full-card">
+                  <div class="info-side">
+                     <div class="chat-bubble">AR Developer</div>
+                     <h2 class="inventor-name">Aizad Najmi</h2>
+                     <p class="inventor-role">Pembangun <span>NutriQuest AR</span></p>
+                     <div class="quote-area">
+                        <p class="quote-text">"Teknologi bukan sekadar alat, ia adalah jambatan kepada pemahaman yang lebih mendalam."</p>
+                     </div>
+                  </div>
+                  <div class="photo-side">
+                     <img src="img/pokjad.png" alt="Aizad">
+                  </div>
+               </div>
+            </div>
+
+            <div class="item">
+               <div class="inventor-full-card">
+                  <div class="info-side">
+                     <div class="chat-bubble">Developer & Designer</div>
+                     <h2 class="inventor-name">Ammar Firdaus</h2>
+                     <p class="inventor-role">Pembangun & Pereka <span>AR</span></p>
+                     <div class="quote-area">
+                        <p class="quote-text">"Kesempurnaan reka bentuk tidak berlaku apabila tiada lagi yang perlu ditambah, tetapi apabila tiada lagi yang boleh dibuang."</p>
+                     </div>
+                  </div>
+                  <div class="photo-side">
+                     <img src="img/ammar.png" alt="Ammar">
+                  </div>
+               </div>
+            </div>
+
+            <div class="item">
+               <div class="inventor-full-card">
+                  <div class="info-side">
+                     <div class="chat-bubble">Content Researcher</div>
+                     <h2 class="inventor-name">Sulina</h2>
+                     <p class="inventor-role">Penyelidik <span>Data</span></p>
+                     <div class="quote-area">
+                        <p class="quote-text">"Kejayaan datang kepada mereka yang sibuk mencarinya."</p>
+                     </div>
+                  </div>
+                  <div class="photo-side">
+                     <img src="img/sulina.png" alt="Sulina">
+                  </div>
+               </div>
+            </div>
+
          </div>
       </section>
    </main>
    
-   <!-- FOOTER -->
-   <div class="s-12 text-center margin-bottom">
+   <footer class="s-12 text-center margin-bottom">
       <p class="text-size-12 text-white">Copyright 2025, Vision Design - graphic zoo</p>
       <p class="text-size-12 text-white">Untuk Tujuan Inovasi Pendidikan Jasmani</p>
       <p><a class="text-size-12 text-white text-primary-hover" href="http://www.myresponsee.com" title="Responsee - lightweight responsive framework">Design and coding oleh Ahli kumpulan Inovasi FSSK</a></p>
-    </div>
-  </footer>                                                                    
-  <script type="text/javascript" src="js/responsee.js"></script>
-  <script type="text/javascript" src="owl-carousel/owl.carousel.js"></script>
-  <script type="text/javascript" src="js/template-scripts.js"></script>
+   </footer>
+   
+   <script type="text/javascript" src="js/responsee.js"></script>
+   <script type="text/javascript" src="js/template-scripts.js"></script>
+
+   <script>
+      $(document).ready(function() {
+        // Using the new ID #hero-slider so it doesn't conflict with other scripts
+        $("#hero-slider").owlCarousel({
+            navigation : true,
+            slideSpeed : 300,
+            paginationSpeed : 400,
+            
+            // FORCING 1 ITEM ON ALL SCREENS
+            singleItem: true, 
+            items: 1,
+            
+            // Force overrides for Owl Carousel v1
+            itemsDesktop: false,
+            itemsDesktopSmall: false,
+            itemsTablet: false,
+            itemsMobile: false,
+            
+            autoPlay: 8000,   
+            pagination: true,
+            stopOnHover: true
+        });
+      });
+   </script>
 
 </body>
 </html>
