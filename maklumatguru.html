@@ -43,74 +43,70 @@
 
    /* --- SLIDER CONTAINER --- */
    #hero-slider {
-       max-width: 1150px; 
+       max-width: 750px; /* Mengekalkan kad bersaiz besar di tengah skrin */
        width: 100%;
        margin: 0 auto;
        display: block;
    }
 
-   /* Style for individual slider item */
    #hero-slider .item {
-       width: 100%; 
-       display: block;
-       padding: 15px; 
+       padding: 20px; 
        box-sizing: border-box;
+       display: block;
    }
 
-   /* --- CARD STYLES (Grid Mode) --- */
+   /* --- KAD PROFIL (Fokus Satu Orang - Menegak) --- */
    .inventor-full-card {
        display: flex;
-       flex-direction: column-reverse; /* Places text on bottom, image on top */
+       flex-direction: column; /* Gambar di atas, teks di bawah */
        width: 100%;
        background-color: #ffffff;
-       border-radius: 15px;
+       border-radius: 20px;
        overflow: hidden;
-       box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-       min-height: 520px; /* Gives all cards a perfectly matched, uniform height */
+       box-shadow: 0 15px 35px rgba(0,0,0,0.4);
    }
 
-   /* Bottom Side: Text Area */
-   .info-side {
-       flex: 1; 
-       padding: 25px 20px;
-       display: flex;
-       flex-direction: column;
-       justify-content: flex-start;
-       align-items: center; /* Centers text for grid alignment */
-       text-align: center;
-       background: #fff;
-   }
-
-   /* Top Side: Photo Area */
+   /* Bahagian Gambar (Atas) */
    .photo-side {
        width: 100%;
-       height: 240px; /* Fixed height so all pictures match up evenly */
-       position: relative;
+       height: 420px; /* Ruang gambar yang besar dan jelas */
        background-color: #f9f9f9; 
-       overflow: hidden; 
-       flex: none;
        display: flex;
        justify-content: center;
-       align-items: flex-end;
+       align-items: flex-end; /* Memastikan gambar rapat ke garisan bawah */
+       position: relative;
+       overflow: hidden;
    }
 
    .photo-side img {
-       width: 100% !important;
-       height: 100% !important;
-       object-fit: cover !important; /* Crops cleanly to fill the frame without distortion */
-       object-position: center top; 
+       height: 100% !important; 
+       width: auto !important; 
+       max-width: 100%;
+       object-fit: contain !important; /* Elak muka terpotong */
+       object-position: bottom;
        display: block;
+   }
+
+   /* Bahagian Teks & Petikan (Bawah) */
+   .info-side {
+       padding: 40px 30px;
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center; /* Memusatkan semua teks */
+       text-align: center;
+       background: #fff;
    }
 
    /* --- TYPOGRAPHY --- */
    .chat-bubble {
        background-color: #e53935;
        color: #ffffff !important;
-       padding: 6px 15px;
+       padding: 8px 25px;
        border-radius: 20px;
        font-weight: bold;
-       font-size: 0.8rem;
-       margin-bottom: 12px;
+       font-size: 0.95rem;
+       margin-bottom: 15px;
        text-transform: uppercase;
        letter-spacing: 1px;
        display: inline-block;
@@ -118,17 +114,17 @@
 
    .inventor-name {
        color: #000000 !important;
-       font-size: 1.5rem; /* Resized perfectly to prevent text wrapping/clashing */
+       font-size: 2.2rem; 
        font-weight: 800;
-       line-height: 1.2;
-       margin-bottom: 6px;
+       line-height: 1.1;
+       margin-bottom: 10px;
        text-transform: uppercase;
    }
 
    .inventor-role {
        color: #555555 !important;
-       font-size: 1.05rem;
-       margin-bottom: 15px;
+       font-size: 1.2rem;
+       margin-bottom: 20px;
        font-weight: 400;
    }
    
@@ -138,32 +134,25 @@
    }
 
    .quote-area {
-       border-top: 3px solid #e53935; /* Changes from left-border to a top-divider line */
-       border-left: none;
-       padding-top: 12px;
-       padding-left: 0;
-       margin-top: 5px;
-       width: 100%;
+       border-top: 4px solid #e53935; /* Garisan pemisah yang elegan di atas quotes */
+       padding-top: 20px;
+       margin-top: 10px;
+       width: 85%; /* Menjadikan perenggan quotes lebih kemas di tengah */
    }
 
    .quote-text {
-       font-size: 0.95rem;
+       font-size: 1.15rem;
        font-style: italic;
        color: #333333 !important;
-       line-height: 1.4;
+       line-height: 1.6;
    }
-
-   /* --- RESPONSIVE DESIGN --- */
-   @media screen and (max-width: 1024px) {
-       body {
-           background-attachment: scroll;
-       }
-       .inventor-full-card {
-           min-height: auto;
-       }
-       .photo-side {
-           height: 260px;
-       }
+   
+   /* --- RESPONSIVE DESIGN (Telefon) --- */
+   @media screen and (max-width: 768px) {
+       body { background-attachment: scroll; }
+       .photo-side { height: 320px; }
+       .inventor-name { font-size: 1.8rem; }
+       .quote-area { width: 100%; }
    }
 </style>
 </head>
@@ -363,16 +352,16 @@
    <script>
    $(document).ready(function() {
      $("#hero-slider").owlCarousel({
-         singleItem: true,       // This tells Owl to show 1 full card at a time
-         navigation: true,
+         singleItem: true,           // HANYA paparkan 1 ahli kumpulan di tengah
+         navigation: true,           // Aktifkan butang ke kiri dan ke kanan
+         navigationText: ["◄", "►"], // Ikon butang kiri dan kanan
          pagination: true,
-         slideSpeed: 300,
+         slideSpeed: 400,
          paginationSpeed: 400,
-         autoPlay: 7000,         // Rotates automatically every 7 seconds
-         stopOnHover: true       // Pauses when the user hovers over it
+         autoPlay: 8000,             // Bertukar profil setiap 8 saat (letak 'false' jika tak mahu ia bergerak sendiri)
+         stopOnHover: true           
      });
    });
 </script>
-
 </body>
 </html>
