@@ -30,193 +30,146 @@
      });
    </script>
 
-   <style>
-      /* Background Defaults */
-      body {
-         background-image: url('img/belakang.jpg'); 
-         background-size: cover; 
-         background-position: center; 
-         background-repeat: no-repeat; 
-         background-attachment: fixed; 
-         overflow-x: hidden;
-      }
+  <style>
+   /* Background Defaults */
+   body {
+      background-image: url('img/belakang.jpg'); 
+      background-size: cover; 
+      background-position: center; 
+      background-repeat: no-repeat; 
+      background-attachment: fixed; 
+      overflow-x: hidden;
+   }
 
-      /* --- SLIDER CONTAINER --- */
-      /* Changed ID to match new HTML */
-      #hero-slider {
-          max-width: 1100px; 
-          width: 100%;
-          margin: 0 auto;
-          display: block;
-      }
+   /* --- SLIDER CONTAINER --- */
+   #hero-slider {
+       max-width: 1100px; 
+       width: 100%;
+       margin: 0 auto;
+       display: block;
+   }
 
-      /* Style for individual slider item */
-      #hero-slider .item {
-          width: 100%; 
-          display: block;
-          padding: 15px; 
-          box-sizing: border-box;
-      }
+   /* Style for individual slider item */
+   #hero-slider .item {
+       width: 100%; 
+       display: block;
+       padding: 15px; 
+       box-sizing: border-box;
+   }
 
-      /* --- CARD STYLES (Desktop Default) --- */
-      .inventor-full-card {
-          display: flex;
-          flex-direction: row; 
-          width: 100%;
-          background-color: #ffffff;
-          border-radius: 15px;
-          overflow: hidden;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-          min-height: 500px; 
-      }
+   /* --- CARD STYLES (New Grid Default) --- */
+   .inventor-full-card {
+       display: flex;
+       flex-direction: column-reverse; /* Places image on top, text below */
+       width: 100%;
+       background-color: #ffffff;
+       border-radius: 15px;
+       overflow: hidden;
+       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+       height: 100%;
+       min-height: 480px; 
+   }
 
-      /* Left Side: Text Area */
-      .info-side {
-          flex: 1; 
-          padding: 50px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: flex-start;
-          text-align: left;
-          background: #fff;
-          z-index: 2;
-      }
+   /* Bottom Side: Text Area */
+   .info-side {
+       flex: none; 
+       padding: 25px 15px;
+       display: flex;
+       flex-direction: column;
+       justify-content: flex-start;
+       align-items: center;
+       text-align: center;
+       background: #fff;
+       z-index: 2;
+   }
 
-      /* Right Side: Photo Area */
-      .photo-side {
-          flex: 1; 
-          position: relative;
-          min-height: 100%;
-          background-color: #f4f4f4; 
-          overflow: hidden; 
-      }
+   /* Top Side: Photo Area */
+   .photo-side {
+       width: 100%;
+       height: 250px; /* Forces uniform image height across all cards */
+       position: relative;
+       background-color: #f4f4f4; 
+       overflow: hidden; 
+       flex: none;
+   }
 
-      .photo-side img {
-          width: 100% !important;
-          height: 100% !important;
-          object-fit: cover; 
-          object-position: center top;
-          display: block;
-      }
+   .photo-side img {
+       width: 100% !important;
+       height: 100% !important;
+       object-fit: contain !important; /* Ensures faces aren't cropped out */
+       object-position: center bottom;
+       display: block;
+   }
 
-      /* --- TYPOGRAPHY --- */
-      .chat-bubble {
-          background-color: #e53935;
-          color: #ffffff !important;
-          padding: 8px 20px;
-          border-radius: 20px 20px 20px 0;
-          font-weight: bold;
-          font-size: 0.9rem;
-          margin-bottom: 15px;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-      }
+   /* --- TYPOGRAPHY --- */
+   .chat-bubble {
+       background-color: #e53935;
+       color: #ffffff !important;
+       padding: 6px 15px;
+       border-radius: 20px;
+       font-weight: bold;
+       font-size: 0.8rem;
+       margin-bottom: 12px;
+       text-transform: uppercase;
+       letter-spacing: 1px;
+   }
 
-      .inventor-name {
-          color: #000000 !important;
-          font-size: 3rem;
-          font-weight: 800;
-          line-height: 1.1;
-          margin-bottom: 10px;
-          text-transform: uppercase;
-      }
+   .inventor-name {
+       color: #000000 !important;
+       font-size: 1.6rem; /* Scaled down perfectly for grid view */
+       font-weight: 800;
+       line-height: 1.2;
+       margin-bottom: 5px;
+       text-transform: uppercase;
+   }
 
-      .inventor-role {
-          color: #555555 !important;
-          font-size: 1.3rem;
-          margin-bottom: 25px;
-          font-weight: 400;
-      }
-      
-      .inventor-role span {
-          color: #e53935;
-          font-weight: 700;
-      }
+   .inventor-role {
+       color: #555555 !important;
+       font-size: 1.1rem;
+       margin-bottom: 15px;
+       font-weight: 400;
+   }
+   
+   .inventor-role span {
+       color: #e53935;
+       font-weight: 700;
+   }
 
-      .quote-area {
-          border-left: 5px solid #e53935;
-          padding-left: 20px;
-          margin-top: 10px;
-      }
+   .quote-area {
+       border-top: 3px solid #e53935;
+       padding-top: 15px;
+       margin-top: 5px;
+       width: 100%;
+   }
 
-      .quote-text {
-          font-size: 1.1rem;
-          font-style: italic;
-          color: #333333 !important;
-          line-height: 1.5;
-      }
+   .quote-text {
+       font-size: 0.95rem;
+       font-style: italic;
+       color: #333333 !important;
+       line-height: 1.4;
+   }
 
-      .btn-profile {
-          background: #000;
-          color: #fff !important;
-          padding: 12px 30px;
-          border-radius: 50px;
-          text-decoration: none;
-          font-weight: bold;
-          margin-top: 30px;
-          display: inline-block;
-          transition: 0.3s;
-      }
-      .btn-profile:hover {
-          background: #e53935;
-      }
+   /* --- RESPONSIVE DESIGN (Mobile adjustments) --- */
+   @media screen and (max-width: 1024px) {
+       body {
+           background-attachment: scroll;
+       }
 
-      /* --- RESPONSIVE DESIGN (Phone & Tablet) --- */
-      @media screen and (max-width: 1024px) {
-          
-          body {
-              background-attachment: scroll;
-          }
+       #hero-slider .item {
+           height: auto !important; 
+           min-height: auto !important;
+       }
 
-          #hero-slider .item {
-              height: auto !important; 
-              min-height: auto !important;
-          }
-
-          /* Stack Content: Image Top, Text Bottom */
-          .inventor-full-card {
-              flex-direction: column-reverse; 
-              height: auto;
-              width: 95%;
-              margin: 0 auto;
-          }
-          
-          .photo-side {
-              height: 300px; 
-              width: 100%;
-              flex: none; 
-              background-color: #e0e0e0;
-          }
-
-          /* PREVENT ZOOM: Use 'contain' to show full face on mobile */
-          .photo-side img {
-              object-fit: contain !important; 
-              object-position: center bottom; 
-              width: 100% !important;
-              height: 100% !important;
-          }
-          
-          .info-side {
-              flex: none;
-              width: 100%;
-              padding: 30px 20px;
-              align-items: center;
-              text-align: center;
-          }
-          
-          .inventor-name {
-              font-size: 2rem;
-          }
-
-          .quote-area {
-              border-left: none;
-              border-top: 3px solid #e53935;
-              padding-left: 0;
-              padding-top: 15px;
-          }
-      }
-   </style>
+       .inventor-full-card {
+           width: 95%;
+           margin: 0 auto;
+       }
+       
+       .photo-side {
+           height: 280px; 
+       }
+   }
+</style>
 </head>
 
 <body class="size-1520 primary-color-red background-dark">
@@ -412,29 +365,20 @@
    <script type="text/javascript" src="js/template-scripts.js"></script>
 
    <script>
-      $(document).ready(function() {
-        // Using the new ID #hero-slider so it doesn't conflict with other scripts
-        $("#hero-slider").owlCarousel({
-            navigation : true,
-            slideSpeed : 300,
-            paginationSpeed : 400,
-            
-            // FORCING 1 ITEM ON ALL SCREENS
-            singleItem: true, 
-            items: 1,
-            
-            // Force overrides for Owl Carousel v1
-            itemsDesktop: false,
-            itemsDesktopSmall: false,
-            itemsTablet: false,
-            itemsMobile: false,
-            
-            autoPlay: 8000,   
-            pagination: true,
-            stopOnHover: true
-        });
-      });
-   </script>
+   $(document).ready(function() {
+     $("#hero-slider").owlCarousel({
+         items: 3,                 // Displays 3 cards side-by-side on desktop
+         itemsDesktop: [1199, 3],
+         itemsDesktopSmall: [979, 2], 
+         itemsTablet: [768, 2],    // Slips to 2 cards on tablets
+         itemsMobile: [479, 1],    // 1 card on mobile view
+         navigation: true,
+         pagination: true,
+         autoPlay: 6000,
+         stopOnHover: true
+     });
+   });
+</script>
 
 </body>
 </html>
