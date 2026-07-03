@@ -43,59 +43,62 @@
 
    /* --- SLIDER CONTAINER --- */
    #hero-slider {
-       max-width: 1000px; /* Prevents it from stretching too wide on huge monitors */
+       max-width: 1150px; 
        width: 100%;
        margin: 0 auto;
        display: block;
    }
 
-   /* Let Owl Carousel handle widths naturally */
+   /* Style for individual slider item */
    #hero-slider .item {
+       width: 100%; 
+       display: block;
        padding: 15px; 
        box-sizing: border-box;
-       display: block;
    }
 
-   /* --- CARD STYLES (Single Item Horizontal) --- */
+   /* --- CARD STYLES (Grid Mode) --- */
    .inventor-full-card {
        display: flex;
-       flex-direction: row; /* Text on left, Image on right */
+       flex-direction: column-reverse; /* Places text on bottom, image on top */
        width: 100%;
        background-color: #ffffff;
        border-radius: 15px;
        overflow: hidden;
-       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-       min-height: 400px; 
+       box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+       min-height: 520px; /* Gives all cards a perfectly matched, uniform height */
    }
 
-   /* Left Side: Text Area */
+   /* Bottom Side: Text Area */
    .info-side {
        flex: 1; 
-       padding: 40px;
+       padding: 25px 20px;
        display: flex;
        flex-direction: column;
-       justify-content: center;
-       align-items: flex-start;
-       text-align: left;
+       justify-content: flex-start;
+       align-items: center; /* Centers text for grid alignment */
+       text-align: center;
        background: #fff;
    }
 
-   /* Right Side: Photo Area */
+   /* Top Side: Photo Area */
    .photo-side {
-       flex: 1; 
-       background-color: #f4f4f4; 
+       width: 100%;
+       height: 240px; /* Fixed height so all pictures match up evenly */
+       position: relative;
+       background-color: #f9f9f9; 
+       overflow: hidden; 
+       flex: none;
        display: flex;
        justify-content: center;
-       align-items: flex-end; /* Pins the person to the bottom of the card */
-       position: relative;
+       align-items: flex-end;
    }
 
    .photo-side img {
-       max-width: 100%;
-       height: 400px !important; /* Standardizes image height */
-       width: auto !important;
-       object-fit: contain !important; /* Prevents awkward cropping */
-       object-position: bottom;
+       width: 100% !important;
+       height: 100% !important;
+       object-fit: cover !important; /* Crops cleanly to fill the frame without distortion */
+       object-position: center top; 
        display: block;
    }
 
@@ -103,28 +106,29 @@
    .chat-bubble {
        background-color: #e53935;
        color: #ffffff !important;
-       padding: 8px 20px;
-       border-radius: 20px 20px 20px 0;
+       padding: 6px 15px;
+       border-radius: 20px;
        font-weight: bold;
-       font-size: 0.9rem;
-       margin-bottom: 15px;
+       font-size: 0.8rem;
+       margin-bottom: 12px;
        text-transform: uppercase;
        letter-spacing: 1px;
+       display: inline-block;
    }
 
    .inventor-name {
        color: #000000 !important;
-       font-size: 2.5rem;
+       font-size: 1.5rem; /* Resized perfectly to prevent text wrapping/clashing */
        font-weight: 800;
-       line-height: 1.1;
-       margin-bottom: 10px;
+       line-height: 1.2;
+       margin-bottom: 6px;
        text-transform: uppercase;
    }
 
    .inventor-role {
        color: #555555 !important;
-       font-size: 1.2rem;
-       margin-bottom: 25px;
+       font-size: 1.05rem;
+       margin-bottom: 15px;
        font-weight: 400;
    }
    
@@ -134,59 +138,31 @@
    }
 
    .quote-area {
-       border-left: 5px solid #e53935;
-       padding-left: 20px;
-       margin-top: 10px;
+       border-top: 3px solid #e53935; /* Changes from left-border to a top-divider line */
+       border-left: none;
+       padding-top: 12px;
+       padding-left: 0;
+       margin-top: 5px;
+       width: 100%;
    }
 
    .quote-text {
-       font-size: 1.1rem;
+       font-size: 0.95rem;
        font-style: italic;
        color: #333333 !important;
-       line-height: 1.5;
+       line-height: 1.4;
    }
 
-   /* --- RESPONSIVE DESIGN (Phones & Tablets) --- */
-   @media screen and (max-width: 900px) {
+   /* --- RESPONSIVE DESIGN --- */
+   @media screen and (max-width: 1024px) {
        body {
            background-attachment: scroll;
        }
-
        .inventor-full-card {
-           flex-direction: column-reverse; /* Image on top, Text on bottom */
+           min-height: auto;
        }
-       
        .photo-side {
-           height: 350px; 
-           width: 100%;
-           flex: none; 
-       }
-
-       .photo-side img {
-           height: 350px !important; 
-       }
-       
-       .info-side {
-           flex: none;
-           width: 100%;
-           padding: 30px 20px;
-           align-items: center;
-           text-align: center;
-       }
-       
-       .inventor-name {
-           font-size: 2rem;
-       }
-
-       .chat-bubble {
-           border-radius: 20px;
-       }
-
-       .quote-area {
-           border-left: none;
-           border-top: 3px solid #e53935;
-           padding-left: 0;
-           padding-top: 15px;
+           height: 260px;
        }
    }
 </style>
